@@ -1,0 +1,156 @@
+{
+  "breads": [
+    {
+      "id": 1,
+      "name": "단팥빵",
+      "category": 1,
+      "price": 1900,
+      "images": {
+        "official": "/images/breads/basic/1.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "위에 깨 3개가 있어요",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "id": 2,
+      "name": "소보로빵",
+      "category": 1,
+      "price": 1900,
+      "images": {
+        "official": "/images/breads/basic/2.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "id": 3,
+      "name": "슈크림빵",
+      "category": 1,
+      "price": 1900,
+      "images": {
+        "official": "/images/breads/basic/3.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "id": 4,
+      "name": "소금버터롤",
+      "category": 1,
+      "price": 2600,
+      "images": {
+        "official": "/images/breads/basic/4.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": true,
+      "isnew": false
+    },
+    {
+      "id": 5,
+      "name": "완두앙금빵",
+      "category": 1,
+      "price": 1900,
+      "images": {
+        "official": "/images/breads/basic/5.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "id": 6,
+      "name": "오리지널커피번",
+      "category": 1,
+      "price": 3200,
+      "images": {
+        "official": "/images/breads/basic/2.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "일반빵"
+    },
+    {
+      "id": 2,
+      "name": "크림빵"
+    },
+    {
+      "id": 3,
+      "name": "조리빵"
+    },
+    {
+      "id": 4,
+      "name": "파이/페스츄리"
+    },
+    {
+      "id": 5,
+      "name": "도넛/고로케"
+    },
+    {
+      "id": 6,
+      "name": "유럽건강빵"
+    },
+    {
+      "id": 7,
+      "name": "식빵"
+    },
+    {
+      "id": 8,
+      "name": "양과"
+    },
+    {
+      "id": 9,
+      "name": "마카롱"
+    }
+  ]
+}
