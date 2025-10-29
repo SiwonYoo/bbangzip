@@ -23,7 +23,7 @@ function BreadPedia() {
           </div>
         ) : (
           <>
-            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 h-12 bg-offwhite/80 overflow-x-scroll text-nowrap">
+            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories?.map((item, idx) => (
                 <li key={idx}>
                   <button
@@ -37,7 +37,7 @@ function BreadPedia() {
                 </li>
               ))}
             </ul>
-            <div className="grid grid-cols-2 pb-4 gap-4 overflow-y-scroll">
+            <div className="grid grid-cols-2 pb-4 gap-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {breads
                 ?.filter((item) => {
                   if (selectedCategory.id) return item.category === selectedCategory.id;

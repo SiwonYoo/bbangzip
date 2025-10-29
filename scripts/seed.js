@@ -1,13 +1,17 @@
 import { createClient } from "@supabase/supabase-js";
 import fs from "fs";
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const data = JSON.parse(fs.readFileSync("./breads.json", "utf-8"));
 
 async function seed() {
-  await supabase.from("breads").delete().neq("id", 0);
-  await supabase.from("categories").delete().neq("id", 0);
+  await supabase.rpc("exec_sql", {
+    query: `
+        truncate table breads restart identity cascade;
+        truncate table categories restart identity cascade;
+      `,
+  });
 
   try {
     const { error: categoriesError } = await supabase.from("categories").insert(data.categories);

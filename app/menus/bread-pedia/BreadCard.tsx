@@ -6,8 +6,8 @@ function BreadCard({ bread, category }: { bread: BreadType; category: CategoryTy
     <>
       <div className="flex flex-col items-center rounded-xl p-4 bg-white">
         <Image src={bread.images.official} width={200} height={200} alt={bread.name} />
-        <div className="text-center">
-          <h2 className="text-t-primary text-lg">{bread.name}</h2>
+        <div className="text-center w-full">
+          <h2 className="text-t-primary text-lg truncate">{bread.name}</h2>
           <p>
             {category.name} | {bread.price.toLocaleString()}원
           </p>
