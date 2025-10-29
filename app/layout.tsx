@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${jua.variable} antialiased`}>{children}</body>
+      <body className={`${jua.variable} antialiased`}>
+        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-jua dark:bg-black text-t-secondary">{children}</div>
+      </body>
     </html>
   );
 }
