@@ -46,7 +46,12 @@ function ResultModal({ isOpen, setIsOpen, isAnswer, breadName, categoryName, han
     <>
       {isOpen && (
         <div className="fixed flex h-dvh min-w-100 max-w-3xl mx-auto inset-0 justify-center items-center bg-black/50 z-10">
-          <div role="dialog" className="flex flex-col gap-4 items-center p-8 w-[90%] max-w-100 rounded-4xl bg-white z-10" ref={dialogRef} tabIndex={-1}>
+          <div
+            role="dialog"
+            className="flex flex-col gap-4 items-center p-8 w-[90%] max-w-100 rounded-4xl bg-white z-10 text-center"
+            ref={dialogRef}
+            tabIndex={-1}
+          >
             <div>
               <Image
                 src={isAnswer ? "/images/bbangzip-icons/happy-bbangzip.png" : "/images/bbangzip-icons/sad-bbangzip.png"}
