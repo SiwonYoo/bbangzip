@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuizStore } from "@/store/quizStore";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
 
-function Result() {
+function ResultContent() {
   const searchParams = useSearchParams();
   const answerCount = searchParams.get("answerCount");
   const wrongBreads = useQuizStore((state) => state.wrongBreads);
@@ -58,4 +59,10 @@ function Result() {
   );
 }
 
-export default Result;
+export default function Result() {
+  return (
+    <Suspense fallback={<p>로딩 중...</p>}>
+      <ResultContent />
+    </Suspense>
+  );
+}
