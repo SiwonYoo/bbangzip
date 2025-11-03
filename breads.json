@@ -1068,8 +1068,532 @@
     },
 
     {
+      "name": "앙버터라우겐",
+      "category": 6,
+      "price": 4600,
+      "images": {
+        "official": "/images/breads/european/1.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "기분좋은쌀베이글",
+      "category": 6,
+      "price": 2600,
+      "images": {
+        "official": "/images/breads/european/2.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "기분좋은올리브베이글",
+      "category": 6,
+      "price": 2800,
+      "images": {
+        "official": "/images/breads/european/3.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "호두연유바게트",
+      "category": 6,
+      "price": 4500,
+      "images": {
+        "official": "/images/breads/european/4.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "프랑스바게트",
+      "category": 6,
+      "price": 4500,
+      "images": {
+        "official": "/images/breads/european/5.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "착한빵식통밀빵",
+      "category": 6,
+      "price": 4200,
+      "images": {
+        "official": "/images/breads/european/6.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "크림치즈월넛브레드",
+      "category": 6,
+      "price": 5700,
+      "images": {
+        "official": "/images/breads/european/7.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "갈릭퐁당브레드(소)",
+      "category": 6,
+      "price": 3200,
+      "images": {
+        "official": "/images/breads/european/8.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "콩팥담뿍브레드",
+      "category": 6,
+      "price": 5800,
+      "images": {
+        "official": "/images/breads/european/9.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "콩팥담뿍브레드(Half)",
+      "category": 6,
+      "price": 2800,
+      "images": {
+        "official": "/images/breads/european/10.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "데일리베이글",
+      "category": 6,
+      "price": 2600,
+      "images": {
+        "official": "/images/breads/european/11.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "데일리블루베리베이글",
+      "category": 6,
+      "price": 2800,
+      "images": {
+        "official": "/images/breads/european/12.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "꿀버터바게트",
+      "category": 6,
+      "price": 3400,
+      "images": {
+        "official": "/images/breads/european/13.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "라우겐(2개입)",
+      "category": 6,
+      "price": 4800,
+      "images": {
+        "official": "/images/breads/european/14.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+
+    {
+      "name": "데일리우유식빵",
+      "category": 7,
+      "price": 3600,
+      "images": {
+        "official": "/images/breads/loaf/1.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "그대로구워먹는꿀토스트식빵",
+      "category": 7,
+      "price": 5000,
+      "images": {
+        "official": "/images/breads/loaf/2.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "더블롤치즈식빵(소)",
+      "category": 7,
+      "price": 3900,
+      "images": {
+        "official": "/images/breads/loaf/3.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "고단백현미식빵",
+      "category": 7,
+      "price": 3400,
+      "images": {
+        "official": "/images/breads/loaf/4.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "기분좋은소금버터식빵",
+      "category": 7,
+      "price": 4500,
+      "images": {
+        "official": "/images/breads/loaf/5.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "TLJ옥수수식빵",
+      "category": 7,
+      "price": 5400,
+      "images": {
+        "official": "/images/breads/loaf/6.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "2배더진한우유식빵",
+      "category": 7,
+      "price": 5200,
+      "images": {
+        "official": "/images/breads/loaf/7.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "호박패스트리식빵",
+      "category": 7,
+      "price": 5800,
+      "images": {
+        "official": "/images/breads/loaf/8.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "마구마구밤식빵",
+      "category": 7,
+      "price": 6800,
+      "images": {
+        "official": "/images/breads/loaf/9.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "마구마구밤식빵(소)",
+      "category": 7,
+      "price": 3900,
+      "images": {
+        "official": "/images/breads/loaf/10.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "흑미로운찹쌀식빵(대)",
+      "category": 7,
+      "price": 5500,
+      "images": {
+        "official": "/images/breads/loaf/11.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "生生생크림식빵",
+      "category": 7,
+      "price": 5200,
+      "images": {
+        "official": "/images/breads/loaf/12.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "흑미로운찹쌀식빵(중)",
+      "category": 7,
+      "price": 3600,
+      "images": {
+        "official": "/images/breads/loaf/13.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "고메버터식빵",
+      "category": 7,
+      "price": 5200,
+      "images": {
+        "official": "/images/breads/loaf/14.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+    {
+      "name": "촉촉쫄깃탕종식빵",
+      "category": 7,
+      "price": 5200,
+      "images": {
+        "official": "/images/breads/loaf/15.jpg",
+        "real": ""
+      },
+      "taste": {
+        "description": "",
+        "keywords": []
+      },
+      "tip": "",
+      "confusing": [],
+      "reviews": [],
+      "isbest": false,
+      "isnew": false
+    },
+
+    {
       "name": "씨앗깜파뉴(소)",
-      "category": 10,
+      "category": 8,
       "price": 4600,
       "images": {
         "official": "/images/breads/ect/1.jpg",
@@ -1087,7 +1611,7 @@
     },
     {
       "name": "슬로우오트식빵",
-      "category": 10,
+      "category": 8,
       "price": 5200,
       "images": {
         "official": "/images/breads/ect/2.jpg",
@@ -1105,7 +1629,7 @@
     },
     {
       "name": "파삭크림롤",
-      "category": 10,
+      "category": 8,
       "price": 3100,
       "images": {
         "official": "/images/breads/ect/3.jpg",
@@ -1123,7 +1647,7 @@
     },
     {
       "name": "연유퐁당브레드",
-      "category": 10,
+      "category": 8,
       "price": 3800,
       "images": {
         "official": "/images/breads/ect/4.jpg",
@@ -1141,7 +1665,7 @@
     },
     {
       "name": "치치모스",
-      "category": 10,
+      "category": 8,
       "price": 3400,
       "images": {
         "official": "/images/breads/ect/5.jpg",
@@ -1179,12 +1703,6 @@
     },
     {
       "name": "식빵"
-    },
-    {
-      "name": "양과"
-    },
-    {
-      "name": "마카롱"
     },
     {
       "name": "기타"
