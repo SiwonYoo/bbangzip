@@ -121,7 +121,6 @@ function CategoryQuiz() {
                 randomCategories.map((category) => (
                   <li key={category.id}>
                     <Button
-                      size="full"
                       onClick={() => {
                         handleClick(category.id);
                       }}

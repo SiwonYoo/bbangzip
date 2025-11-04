@@ -45,7 +45,6 @@ function ResultContent() {
               홈으로
             </Button>
             <Button
-              size="full"
               onClick={() => {
                 router.push("/menus/category-quiz");
               }}

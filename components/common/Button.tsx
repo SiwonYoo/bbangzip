@@ -1,8 +1,8 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  size: "full" | "fit";
+  size?: "full" | "fit";
 }
 
-function Button({ children, size, ...rest }: ButtonProps) {
+function Button({ children, size = "full", ...rest }: ButtonProps) {
   const btnSize = {
     full: "w-full",
     fit: "w-fit",
