@@ -45,7 +45,7 @@ function ResultModal({ isOpen, setIsOpen, isAnswer, breadName, categoryName, han
   return (
     <>
       {isOpen && (
-        <div className="fixed flex h-dvh min-w-100 max-w-3xl mx-auto inset-0 justify-center items-center bg-black/50 z-10">
+        <div className="fixed flex h-dvh w-full mx-auto inset-0 justify-center items-center bg-black/50 z-10">
           <div
             role="dialog"
             className="flex flex-col gap-4 items-center p-8 w-[90%] max-w-100 rounded-4xl bg-white z-10 text-center"
@@ -64,10 +64,10 @@ function ResultModal({ isOpen, setIsOpen, isAnswer, breadName, categoryName, han
             </div>
             <div className="text-center">
               <p>
-                <span className="text-t-primary text-2xl">{breadName}</span>은/는
+                <span className="text-t-primary text-xl md:text-2xl">{breadName}</span>은/는
               </p>
               <p>
-                <span className="text-t-primary text-2xl">{categoryName}</span>이에요!
+                <span className="text-t-primary text-2xl">{categoryName}</span>입니다!
               </p>
             </div>
 
