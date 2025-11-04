@@ -47,7 +47,7 @@ export default function Home() {
         </ul>
       </nav>
 
-      <div className="p-2 w-full border-y border-accentdark text-center bg-white">
+      <div className="p-2 w-full border-y border-accentgold text-center bg-white">
         <p className="pb-2 text-t-primary">💌 오늘의 빵.zip 소식 💌</p>
         <p>{news[0].message}</p>
       </div>
