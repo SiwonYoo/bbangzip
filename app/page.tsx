@@ -16,14 +16,14 @@ export default function Home() {
       link: "https://forms.gle/Rs3A1JZhoX7rFeAd6",
       imgPath: "/images/main/sendfeedback-icon.png",
       title: "1분 응원하기",
-      description: "초보 개발자에게 큰 힘이 돼요!",
+      description: "초보 개발자에게 힘이 돼요!",
       blank: true,
     },
   ];
 
   return (
-    <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-12 bg-[url('/images/main/main-bg.jpg')] bg-white/70 bg-blend-overlay">
-      <h1 className="mb-4 text-6xl text-t-primary">빵.zip</h1>
+    <main className="flex gap-4 h-screen w-full max-w-3xl flex-col items-center py-24 px-12 bg-[url('/images/main/main-bg.jpg')] bg-white/70 bg-blend-overlay">
+      <h1 className="text-6xl text-t-primary">빵.zip</h1>
       <p className="text-3xl">오늘도 빵빵하게 🍞</p>
 
       <nav className="flex flex-col justify-center gap-4 flex-1 w-full">
