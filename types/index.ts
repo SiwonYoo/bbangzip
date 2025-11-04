@@ -22,3 +22,8 @@ export interface CategoryType {
   id: number;
   name: string;
 }
+
+export interface NewsItemType {
+  date: string;
+  message: string;
+}
