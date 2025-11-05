@@ -12,7 +12,7 @@ import Button from "../Button";
  * 4. HTML 속성 전달 (disabled, type 등)
  */
 describe("Button 컴포넌트", () => {
-  it("버튼이 렌더링되어야 한다", async () => {
+  it("버튼이 렌더링되어야 한다", () => {
     render(<Button>클릭</Button>);
     const btn = screen.getByRole("button");
 
@@ -64,7 +64,7 @@ describe("Button 컴포넌트", () => {
       const btn = screen.getByRole("button");
       const user = userEvent.setup();
 
-      user.click(btn);
+      await user.click(btn);
 
       expect(mockFn).not.toHaveBeenCalled();
     });
