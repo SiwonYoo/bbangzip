@@ -8,9 +8,7 @@ function BreadCard({ bread, category }: { bread: BreadType; category: CategoryTy
         <Image src={bread.images.official} width={200} height={200} alt={bread.name} className="aspect-square" />
         <div className="text-center w-full">
           <h2 className="text-t-primary text-lg truncate">{bread.name}</h2>
-          <p>
-            {category.name} | {bread.price.toLocaleString()}원
-          </p>
+          <p>{category.name}</p>
         </div>
       </div>
     </>

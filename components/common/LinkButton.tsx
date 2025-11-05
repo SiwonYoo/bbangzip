@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  size: "full" | "fit";
+  size?: "full" | "fit";
   href: string;
 }
 
-function LinkButton({ children, size, href, ...rest }: LinkButtonProps) {
+function LinkButton({ children, href, size = "full", ...rest }: LinkButtonProps) {
   const btnSize = {
     full: "w-full",
     fit: "w-fit",
