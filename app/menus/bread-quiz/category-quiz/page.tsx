@@ -8,7 +8,7 @@ import { useQuizStore } from "@/store/quizStore";
 import { BreadType, CategoryType } from "@/types";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
-import ResultModal from "@/app/menus/category-quiz/ResultModal";
+import ResultModal from "@/app/menus/bread-quiz/category-quiz/ResultModal";
 
 function CategoryQuiz() {
   const categories = useBreadStore((state) => state.categories);
