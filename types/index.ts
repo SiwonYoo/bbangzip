@@ -5,7 +5,7 @@ export interface BreadType {
   price: number;
   images: {
     official: string;
-    real: string;
+    real: string | null;
   };
   taste: {
     description: string;
