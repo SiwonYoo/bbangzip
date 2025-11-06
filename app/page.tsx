@@ -6,7 +6,7 @@ export default function Home() {
     { link: "./menus/bread-pedia", imgPath: "/images/main/breadpedia-icon.png", title: "빵 도감", description: "모든 빵을 한눈에" },
     {
       link: "./menus/bread-quiz",
-      imgPath: "/images/main/categoryquiz-icon.png",
+      imgPath: "/images/main/quiz-icon.png",
       title: "빵 퀴즈",
       description: "게임으로 빵 마스터하기",
     },

@@ -100,7 +100,7 @@ function CategoryQuiz() {
 
   return (
     <>
-      <Header title="카테고리 퀴즈" />
+      <Header title="카테고리 퀴즈" backBtn={true} />
 
       <main className="px-4">
         {!currentBread || !randomCategories ? (
