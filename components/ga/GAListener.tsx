@@ -1,22 +1,18 @@
 "use client";
 
+import { pageview, track404 } from "@/lib/ga";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
 
 function GAListener() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (typeof window.gtag !== "function") return;
-    window.gtag("event", "page_view", {
-      page_path: pathname,
-    });
+    pageview(pathname);
+
+    if (pathname === "/404") {
+      track404(pathname, document.referrer);
+    }
   }, [pathname]);
 
   return null;

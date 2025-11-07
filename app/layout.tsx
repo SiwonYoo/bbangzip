@@ -3,6 +3,8 @@ import { Jua } from "next/font/google";
 import "./globals.css";
 import BreadStoreInitializer from "@/components/store/BreadStoreInitializer";
 import Script from "next/script";
+import { APP_ENV, GA_TRACKING_ID } from "@/lib/ga";
+import GAListener from "@/components/ga/GAListener";
 
 const jua = Jua({ subsets: ["latin"], weight: "400", variable: "--font-jua" });
 
@@ -38,26 +40,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
   return (
     <html lang="ko">
       <head>
-        {GA_ID && <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />}
-        {GA_ID && (
-          <Script id="gtag-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}', { page_path: window.location.pathname });
-            `}
-          </Script>
+        {GA_TRACKING_ID && APP_ENV === "production" && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} strategy="afterInteractive" />
+
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_TRACKING_ID}', { page_path: window.location.pathname });
+              `}
+            </Script>
+          </>
         )}
       </head>
       <body className={`${jua.variable} antialiased`}>
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-jua dark:bg-black text-t-secondary">
           <BreadStoreInitializer />
+          {APP_ENV === "production" && <GAListener />}
           {children}
         </div>
       </body>
