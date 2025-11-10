@@ -7,7 +7,7 @@ import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
-import ResultModal from "@/app/menus/bread-quiz/category-quiz/ResultModal";
+import ResultModal from "@/components/common/ResultModal";
 import { useRandomBreads } from "@/hooks/useRandomBreads";
 import { useRandomCategories } from "@/hooks/useRandomCategories";
 import { CATEGORY_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
@@ -54,7 +54,7 @@ function CategoryQuiz() {
   const handleClickNext = () => {
     // Quiz 종료 시
     if (level === CATEGORY_QUIZ_TOTAL_COUNT) {
-      navigate.push(`/menus/category-quiz/result?answerCount=${answerCount}`);
+      navigate.replace(`/menus/bread-quiz/category-quiz/result?answerCount=${answerCount}`);
       return;
     }
 
@@ -76,11 +76,11 @@ function CategoryQuiz() {
             <p className="py-4 text-center">
               {level} / {CATEGORY_QUIZ_TOTAL_COUNT}
             </p>
-            {currentBread && (
-              <div className="flex items-center justify-center w-full h-70 rounded-xl bg-white">
-                <Image src={currentBread.images.official} width={250} height={250} alt={currentBread.name} />
-              </div>
-            )}
+
+            <div className="flex items-center justify-center w-full h-70 rounded-xl bg-white">
+              <Image src={currentBread.images.official} width={250} height={250} alt={currentBread.name} />
+            </div>
+
             <ul className="py-4">
               {randomCategories &&
                 randomCategories.map((category) => (

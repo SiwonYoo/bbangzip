@@ -39,17 +39,17 @@ function ResultContent() {
             <Button
               size="full"
               onClick={() => {
-                router.push("/");
+                router.replace("/");
               }}
             >
               홈으로
             </Button>
             <Button
               onClick={() => {
-                router.push("/menus/category-quiz");
+                router.replace("/menus/bread-quiz/category-quiz");
               }}
             >
-              다시 하기
+              다시하기
             </Button>
           </div>
         </div>
