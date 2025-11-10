@@ -5,22 +5,22 @@ import { useRouter } from "next/navigation";
 import { useQuizStore } from "@/store/quizStore";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
-import { CATEGORY_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
+import { REAL_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 
 function Result() {
   const wrongBreads = useQuizStore((state) => state.wrongBreads);
   const router = useRouter();
 
-  const answerCount = CATEGORY_QUIZ_TOTAL_COUNT - wrongBreads.length;
+  const answerCount = REAL_QUIZ_TOTAL_COUNT - wrongBreads.length;
 
   return (
     <>
-      <Header title="카테고리 퀴즈 결과" />
+      <Header title="실전 퀴즈 결과" />
       <main className="px-4">
         <div className="flex flex-col gap-4 items-center py-20">
           <Image src={"/images/bbangzip-icons/happy-bbangzip.png"} alt="빵집 아이콘" width={100} height={100} className="animate-bounce" />
           <p className="text-4xl">
-            {answerCount} / {CATEGORY_QUIZ_TOTAL_COUNT}
+            {answerCount} / {REAL_QUIZ_TOTAL_COUNT}
           </p>
           {wrongBreads.length > 0 ? (
             <section className="flex flex-col items-center p-2 w-full bg-white text-center">
@@ -48,7 +48,7 @@ function Result() {
             </Button>
             <Button
               onClick={() => {
-                router.replace("/menus/bread-quiz/category-quiz");
+                router.replace("/menus/bread-quiz/real-quiz");
               }}
             >
               다시하기

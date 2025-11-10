@@ -1,13 +1,13 @@
 "use clielnt";
 
-import { BreadType, CategoryType } from "@/types";
 import { startTransition, useEffect, useState } from "react";
+import { BreadType, CategoryType } from "@/types";
 
 export function useRandomBreads(breads: BreadType[], categories: CategoryType[], currentBread?: BreadType, count: number = 20, isCurrentMode: boolean = false) {
   const [randomBread, setRandomBread] = useState<BreadType[]>();
 
   useEffect(() => {
-    if (breads.length < count || randomBread) return;
+    if (breads.length < count || (!isCurrentMode && randomBread)) return;
     if (categories.findIndex((item) => item.name === "기타") === -1) return;
 
     const filteredBreads = breads.filter((item) => categories[item.category].name !== "기타");
@@ -18,7 +18,6 @@ export function useRandomBreads(breads: BreadType[], categories: CategoryType[],
       if (currentBread) {
         const curIdx = filteredBreads.findIndex((item) => item.id === currentBread.id);
         randomBreadIdxs.add(curIdx);
-        console.log(curIdx, filteredBreads[curIdx]);
       } else return undefined;
     }
 

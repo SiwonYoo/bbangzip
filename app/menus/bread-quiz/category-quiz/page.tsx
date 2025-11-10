@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
+import { useRandomBreads } from "@/hooks/useRandomBreads";
+import { useRandomCategories } from "@/hooks/useRandomCategories";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
 import ResultModal from "@/components/common/ResultModal";
-import { useRandomBreads } from "@/hooks/useRandomBreads";
-import { useRandomCategories } from "@/hooks/useRandomCategories";
 import { CATEGORY_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 
 function CategoryQuiz() {
@@ -19,7 +19,6 @@ function CategoryQuiz() {
   const [level, setLevel] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [isAnswer, setIsAnswer] = useState(false);
-  const [answerCount, setAnswerCount] = useState(0);
   const navigate = useRouter();
 
   useEffect(() => {
@@ -41,7 +40,6 @@ function CategoryQuiz() {
 
     if (categoryId === currentBread.category) {
       setIsAnswer(true);
-      setAnswerCount((prev) => prev + 1);
     } else {
       setIsAnswer(false);
       addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
@@ -54,7 +52,7 @@ function CategoryQuiz() {
   const handleClickNext = () => {
     // Quiz 종료 시
     if (level === CATEGORY_QUIZ_TOTAL_COUNT) {
-      navigate.replace(`/menus/bread-quiz/category-quiz/result?answerCount=${answerCount}`);
+      navigate.replace(`/menus/bread-quiz/category-quiz/result`);
       return;
     }
 
