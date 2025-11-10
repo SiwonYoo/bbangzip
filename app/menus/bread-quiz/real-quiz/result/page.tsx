@@ -1,25 +1,27 @@
 "use client";
 
-import { Suspense } from "react";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useQuizStore } from "@/store/quizStore";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
+import { REAL_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 
-function ResultContent() {
-  const searchParams = useSearchParams();
-  const answerCount = searchParams.get("answerCount");
+function Result() {
   const wrongBreads = useQuizStore((state) => state.wrongBreads);
   const router = useRouter();
 
+  const answerCount = REAL_QUIZ_TOTAL_COUNT - wrongBreads.length;
+
   return (
     <>
-      <Header title="퀴즈 결과" />
+      <Header title="실전 퀴즈 결과" />
       <main className="px-4">
         <div className="flex flex-col gap-4 items-center py-20">
           <Image src={"/images/bbangzip-icons/happy-bbangzip.png"} alt="빵집 아이콘" width={100} height={100} className="animate-bounce" />
-          <p className="text-4xl">{answerCount} / 20</p>
+          <p className="text-4xl">
+            {answerCount} / {REAL_QUIZ_TOTAL_COUNT}
+          </p>
           {wrongBreads.length > 0 ? (
             <section className="flex flex-col items-center p-2 w-full bg-white text-center">
               <p className="text-t-primary">헷갈렸던 빵들</p>
@@ -39,17 +41,17 @@ function ResultContent() {
             <Button
               size="full"
               onClick={() => {
-                router.push("/");
+                router.replace("/");
               }}
             >
               홈으로
             </Button>
             <Button
               onClick={() => {
-                router.push("/menus/category-quiz");
+                router.replace("/menus/bread-quiz/real-quiz");
               }}
             >
-              다시 하기
+              다시하기
             </Button>
           </div>
         </div>
@@ -58,10 +60,4 @@ function ResultContent() {
   );
 }
 
-export default function Result() {
-  return (
-    <Suspense fallback={<p>로딩 중...</p>}>
-      <ResultContent />
-    </Suspense>
-  );
-}
+export default Result;

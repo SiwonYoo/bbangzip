@@ -1,26 +1,24 @@
 "use client";
 
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
-import { BreadType, CategoryType } from "@/types";
+import { useRandomBreads } from "@/hooks/useRandomBreads";
+import { useRandomCategories } from "@/hooks/useRandomCategories";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
-import ResultModal from "@/app/menus/category-quiz/ResultModal";
+import ResultModal from "@/components/common/ResultModal";
+import { CATEGORY_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 
 function CategoryQuiz() {
   const categories = useBreadStore((state) => state.categories);
   const breads = useBreadStore((state) => state.breads);
   const { addWrongBread, resetWrongBreads } = useQuizStore();
-  const [randomBread, setRandomBread] = useState<BreadType[]>();
-  const [randomCategories, setRandomCategories] = useState<CategoryType[]>();
-  const [currentBread, setCurrentBread] = useState<BreadType>();
   const [level, setLevel] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [isAnswer, setIsAnswer] = useState(false);
-  const [answerCount, setAnswerCount] = useState(0);
   const navigate = useRouter();
 
   useEffect(() => {
@@ -28,49 +26,13 @@ function CategoryQuiz() {
   }, []);
 
   // 랜덤 빵
-  useEffect(() => {
-    if (breads.length < 20 || randomBread) return;
-
-    if (categories.findIndex((item) => item.name === "기타") === -1) return;
-    const filteredBreads = breads.filter((item) => categories[item.category].name !== "기타");
-    if (filteredBreads.length < 20) return;
-
-    const randomBreadIdxs = new Set<number>();
-    while (randomBreadIdxs.size < 20) {
-      randomBreadIdxs.add(Math.floor(Math.random() * filteredBreads.length));
-    }
-
-    startTransition(() => setRandomBread(Array.from(randomBreadIdxs).map((idx) => filteredBreads[idx])));
-  }, [breads, categories]);
+  const randomBreads = useRandomBreads(breads, categories);
 
   // 현재 라운드 빵 설정
-  useEffect(() => {
-    if (!randomBread) return;
-    startTransition(() => setCurrentBread(randomBread[level - 1]));
-  }, [level, randomBread]);
+  const currentBread = randomBreads?.[level - 1];
 
   // 랜덤 카테고리
-  useEffect(() => {
-    if (categories.length < 4 || !currentBread) return;
-
-    const filteredCategories = categories.filter((item) => item.name !== "기타" && item.name !== "전체");
-    if (filteredCategories.length < 4) return;
-
-    const correctCategoryIdx = filteredCategories.findIndex((category) => category.id === currentBread.category);
-    if (correctCategoryIdx === -1) return;
-
-    const randomCategoryIdxs = new Set<number>([correctCategoryIdx]);
-
-    while (randomCategoryIdxs.size < 4) {
-      randomCategoryIdxs.add(Math.floor(Math.random() * filteredCategories.length));
-    }
-
-    const result = Array.from(randomCategoryIdxs)
-      .map((idx) => filteredCategories[idx])
-      .sort(() => Math.random() - 0.5);
-
-    startTransition(() => setRandomCategories(result));
-  }, [categories, currentBread]);
+  const randomCategories = useRandomCategories(categories, currentBread);
 
   // 보기 선택
   const handleClick = (categoryId: number) => {
@@ -78,7 +40,6 @@ function CategoryQuiz() {
 
     if (categoryId === currentBread.category) {
       setIsAnswer(true);
-      setAnswerCount((prev) => prev + 1);
     } else {
       setIsAnswer(false);
       addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
@@ -90,8 +51,8 @@ function CategoryQuiz() {
   // [다음] 버튼 클릭 시
   const handleClickNext = () => {
     // Quiz 종료 시
-    if (level === 20) {
-      navigate.push(`/menus/category-quiz/result?answerCount=${answerCount}`);
+    if (level === CATEGORY_QUIZ_TOTAL_COUNT) {
+      navigate.replace(`/menus/bread-quiz/category-quiz/result`);
       return;
     }
 
@@ -100,7 +61,7 @@ function CategoryQuiz() {
 
   return (
     <>
-      <Header title="카테고리 퀴즈" />
+      <Header title="카테고리 퀴즈" backBtn={true} />
 
       <main className="px-4">
         {!currentBread || !randomCategories ? (
@@ -110,12 +71,14 @@ function CategoryQuiz() {
           </div>
         ) : (
           <>
-            <p className="py-4 text-center">{level} / 20</p>
-            {currentBread && (
-              <div className="flex items-center justify-center w-full h-70 rounded-xl bg-white">
-                <Image src={currentBread.images.official} width={250} height={250} alt={currentBread.name} />
-              </div>
-            )}
+            <p className="py-4 text-center">
+              {level} / {CATEGORY_QUIZ_TOTAL_COUNT}
+            </p>
+
+            <div className="flex items-center justify-center w-full h-70 rounded-xl bg-white">
+              <Image src={currentBread.images.official} width={250} height={250} alt={currentBread.name} />
+            </div>
+
             <ul className="py-4">
               {randomCategories &&
                 randomCategories.map((category) => (
