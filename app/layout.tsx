@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Jua } from "next/font/google";
-import "./globals.css";
-import BreadStoreInitializer from "@/components/store/BreadStoreInitializer";
 import Script from "next/script";
+import "./globals.css";
 import { APP_ENV, GA_TRACKING_ID } from "@/lib/ga";
+import BreadStoreInitializer from "@/components/store/BreadStoreInitializer";
 import GAListener from "@/components/ga/GAListener";
 
 const jua = Jua({ subsets: ["latin"], weight: "400", variable: "--font-jua" });
@@ -52,7 +52,7 @@ export default function RootLayout({
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}', { page_path: window.location.pathname });
+                gtag('config', '${GA_TRACKING_ID}', { send_page_view: false });
               `}
             </Script>
           </>
