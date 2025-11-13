@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
 import { useRandomBreads } from "@/hooks/useRandomBreads";
 import { useRandomCategories } from "@/hooks/useRandomCategories";
+import { trackQuizAnswer, trackQuizEnd, trackQuizExit, trackQuizStart } from "@/lib/ga";
 import Button from "@/components/common/Button";
 import Header from "@/components/common/Header";
 import ResultModal from "@/components/common/ResultModal";
@@ -15,15 +16,34 @@ import { CATEGORY_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 function CategoryQuiz() {
   const categories = useBreadStore((state) => state.categories);
   const breads = useBreadStore((state) => state.breads);
-  const { addWrongBread, resetWrongBreads } = useQuizStore();
-  const [level, setLevel] = useState(1);
+  const { wrongBreads, addWrongBread, resetWrongBreads } = useQuizStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isAnswer, setIsAnswer] = useState(false);
+  const [startTime, setStartTime] = useState(0);
+  const [level, setLevel] = useState(1);
+  const levelRef = useRef(level);
   const navigate = useRouter();
 
   useEffect(() => {
     resetWrongBreads();
+
+    startTransition(() => {
+      setStartTime(Date.now());
+    });
+    // GA: 퀴즈 시작
+    trackQuizStart("category");
+
+    return () => {
+      if (levelRef.current < CATEGORY_QUIZ_TOTAL_COUNT) {
+        // GA: 퀴즈 중도 이탈
+        trackQuizExit("category", levelRef.current, CATEGORY_QUIZ_TOTAL_COUNT);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    levelRef.current = level;
+  }, [level]);
 
   // 랜덤 빵
   const randomBreads = useRandomBreads(breads, categories);
@@ -39,8 +59,12 @@ function CategoryQuiz() {
     if (!currentBread) return;
 
     if (categoryId === currentBread.category) {
+      // GA: 정답
+      trackQuizAnswer("category", true, currentBread.name);
       setIsAnswer(true);
     } else {
+      // GA: 오답
+      trackQuizAnswer("category", false, currentBread.name);
       setIsAnswer(false);
       addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
     }
@@ -52,6 +76,10 @@ function CategoryQuiz() {
   const handleClickNext = () => {
     // Quiz 종료 시
     if (level === CATEGORY_QUIZ_TOTAL_COUNT) {
+      const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+      // GA: 퀴즈 종료
+      trackQuizEnd("category", CATEGORY_QUIZ_TOTAL_COUNT - wrongBreads.length, CATEGORY_QUIZ_TOTAL_COUNT, timeTaken);
+
       navigate.replace(`/menus/bread-quiz/category-quiz/result`);
       return;
     }
