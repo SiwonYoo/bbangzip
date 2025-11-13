@@ -1,25 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
 import { useRandomBreads } from "@/hooks/useRandomBreads";
 import { useRandomCategories } from "@/hooks/useRandomCategories";
+import { trackQuizAnswer, trackQuizEnd, trackQuizExit, trackQuizStart } from "@/lib/ga";
 import Header from "@/components/common/Header";
 import ResultModal from "@/components/common/ResultModal";
 import { REAL_QUIZ_TOTAL_COUNT } from "@/constants/quiz";
 
 function RealQuiz() {
   const [level, setLevel] = useState(1);
+  const levelRef = useRef(level);
   const [checkedCategory, setCheckedCategory] = useState("");
   const [checkedBreadName, setCheckedBreadName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useRouter();
   const [categoryAnswers, setCategoryAnswers] = useState<{ [category: string]: "correct" | "wrong" | null }>({});
   const [breadNameAnswers, setBreadNameAnswers] = useState<{ [breadName: string]: "correct" | "wrong" | null }>({});
-  const { addWrongBread, resetWrongBreads } = useQuizStore();
+  const [startTime, setStartTime] = useState(0);
+  const [retryCount, setRetryCount] = useState(0);
+  const { wrongBreads, addWrongBread, resetWrongBreads } = useQuizStore();
 
   // 실제 사진이 있는 빵 목록 구독 (zustand)
   const realBreads = useBreadStore((state) => state.breadsWithRealImages);
@@ -40,7 +44,24 @@ function RealQuiz() {
   // 틀린 빵 목록 초기화
   useEffect(() => {
     resetWrongBreads();
+
+    startTransition(() => {
+      setStartTime(Date.now());
+    });
+    // GA: 퀴즈 시작
+    trackQuizStart("real");
+
+    return () => {
+      if (levelRef.current < REAL_QUIZ_TOTAL_COUNT) {
+        // GA: 퀴즈 중도 이탈
+        trackQuizExit("real", levelRef.current, REAL_QUIZ_TOTAL_COUNT);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    levelRef.current = level;
+  }, [level]);
 
   // [제출하기] 클릭 시
   const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
@@ -65,10 +86,17 @@ function RealQuiz() {
 
     // 전부 정답일 경우
     if (checkedBreadName === currentBread.name && checkedCategory === correctCategoryName) {
+      // GA: 정답
+      if (retryCount === 0) trackQuizAnswer("real", true, currentBread.name);
+
       setIsOpen(true);
     }
     // 오답이 있을 경우
     else {
+      // GA: 오답
+      if (retryCount === 0) trackQuizAnswer("real", false, currentBread.name);
+      setRetryCount((prev) => prev + 1);
+
       addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
     }
   };
@@ -77,6 +105,10 @@ function RealQuiz() {
   const handleClickNext = () => {
     // Quiz 종료 시
     if (level === REAL_QUIZ_TOTAL_COUNT) {
+      const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+      // GA: 퀴즈 종료
+      trackQuizEnd("real", REAL_QUIZ_TOTAL_COUNT - wrongBreads.length, REAL_QUIZ_TOTAL_COUNT, timeTaken);
+
       navigate.replace(`/menus/bread-quiz/real-quiz/result`);
       return;
     }
@@ -86,6 +118,8 @@ function RealQuiz() {
     setCheckedBreadName("");
     setCategoryAnswers({});
     setBreadNameAnswers({});
+    setRetryCount(0);
+
     setLevel((prev) => prev + 1);
   };
 
