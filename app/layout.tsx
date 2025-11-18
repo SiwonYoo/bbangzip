@@ -59,7 +59,7 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${jua.variable} antialiased`}>
-        <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-jua dark:bg-black text-t-secondary">
+        <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-jua dark:bg-black text-t-secondary">
           <BreadStoreInitializer />
           {APP_ENV === "production" && <GAListener />}
           {children}

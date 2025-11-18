@@ -1,5 +1,8 @@
+import Image from "next/image";
+import { Search } from "lucide-react";
 import { news } from "@/data/news";
 import MenuItem from "@/components/common/MenuItem";
+import Header from "@/components/common/Header";
 
 export default function Home() {
   const menus = [
@@ -20,24 +23,52 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex gap-4 h-screen w-full max-w-3xl flex-col items-center py-24 px-12 bg-[url('/images/main/main-bg.jpg')] bg-white/70 bg-blend-overlay">
-      <h1 className="text-6xl text-t-primary">빵.zip</h1>
-      <p className="text-3xl">오늘도 빵빵하게 🍞</p>
+    <>
+      <div className="flex-1 bg-white">
+        <Header title="빵.zip" />
+        <main>
+          <div className="p-2 w-full border-y border-accentgold text-center bg-white">
+            <p>💌 {news[0].message}</p>
+          </div>
 
-      <nav className="flex flex-col justify-center gap-6 flex-1 w-full">
-        <ul className="contents">
-          {menus.map((menu, idx) => (
-            <li key={idx}>
-              <MenuItem menu={menu} />
-            </li>
-          ))}
-        </ul>
-      </nav>
+          <section className="flex justify-center gap-10 px-5 h-50 bg-offwhite">
+            <Image src={"/images/main/preview-mock.png"} width={150} height={200} alt="빵.zip 미리보기 아이폰 목업 이미지" className="self-end" />
+            <div className="self-center text-center">
+              <p className="mb-2 text-xl">오늘도 빵빵하게</p>
+              <p className="text-4xl text-t-primary">빵.zip</p>
+            </div>
+          </section>
 
-      <div className="p-2 w-full border-y border-accentgold text-center bg-white">
-        <p className="pb-2 text-t-primary">💌 오늘의 빵.zip 소식 💌</p>
-        <p>{news[0].message}</p>
+          <section className="p-6">
+            <nav className="grid grid-cols-2 gap-4">
+              <ul className="contents">
+                <li>
+                  <MenuItem menu={menus[0]} />
+                </li>
+                <li>
+                  <MenuItem menu={menus[1]} />
+                </li>
+                <li className="col-span-2">
+                  <MenuItem menu={menus[2]} />
+                </li>
+              </ul>
+            </nav>
+          </section>
+
+          <section className="p-6">
+            <p className="pb-4 text-center">궁금한 빵을 검색해 보세요!</p>
+            <div className="flex gap-1 items-center">
+              <input type="text" className="flex-1 p-2 border-b border-accentgold" placeholder="이름, 맛, 카테고리 등으로 검색해 보세요!" />
+              <Search color="var(--color-primary)" />
+            </div>
+          </section>
+
+          {/* TODO 추가할 섹션 */}
+          {/* <section className="p-6">
+            <p className="text-center">빵.zip을 이렇게 활용해 보세요!</p>
+          </section> */}
+        </main>
       </div>
-    </main>
+    </>
   );
 }
