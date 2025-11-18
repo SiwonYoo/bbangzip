@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Search } from "lucide-react";
 import { news } from "@/data/news";
 import MenuItem from "@/components/common/MenuItem";
 import Header from "@/components/common/Header";
+import SearchBar from "@/components/common/SearchBar";
 
 export default function Home() {
   const menus = [
@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex-1 bg-white">
+      <div className="flex-1 w-full max-w-2xl bg-white">
         <Header title="빵.zip" />
         <main>
           <div className="p-2 w-full border-y border-accentgold text-center bg-white">
@@ -56,11 +56,8 @@ export default function Home() {
           </section>
 
           <section className="p-6">
-            <p className="pb-4 text-center">궁금한 빵을 검색해 보세요!</p>
-            <div className="flex gap-1 items-center">
-              <input type="text" className="flex-1 p-2 border-b border-accentgold" placeholder="이름, 맛, 카테고리 등으로 검색해 보세요!" />
-              <Search color="var(--color-primary)" />
-            </div>
+            <p className="text-center">궁금한 빵을 검색해 보세요!</p>
+            <SearchBar />
           </section>
 
           {/* TODO 추가할 섹션 */}

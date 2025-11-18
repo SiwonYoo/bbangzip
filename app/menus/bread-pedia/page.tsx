@@ -1,11 +1,12 @@
 "use client";
 
-import BreadCard from "@/app/menus/bread-pedia/BreadCard";
-import Header from "@/components/common/Header";
-import { useBreadStore } from "@/store/breadStore";
-import { CategoryType } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
+import { useBreadStore } from "@/store/breadStore";
+import { CategoryType } from "@/types";
+import Header from "@/components/common/Header";
+import SearchBar from "@/components/common/SearchBar";
+import BreadCard from "@/app/menus/bread-pedia/BreadCard";
 
 function BreadPedia() {
   const breads = useBreadStore((state) => state.breads);
@@ -23,6 +24,7 @@ function BreadPedia() {
           </div>
         ) : (
           <>
+            <SearchBar />
             <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories?.map((item, idx) => (
                 <li key={idx}>
