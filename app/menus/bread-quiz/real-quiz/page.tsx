@@ -1,8 +1,8 @@
 "use client";
 
-import { startTransition, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { startTransition, useEffect, useRef, useState } from "react";
 import { useBreadStore } from "@/store/breadStore";
 import { useQuizStore } from "@/store/quizStore";
 import { useRandomBreads } from "@/hooks/useRandomBreads";
@@ -68,6 +68,7 @@ function RealQuiz() {
     event?.preventDefault();
 
     if (!currentBread) return;
+    if (!checkedBreadName || !checkedCategory) return;
 
     const correctCategoryName = categories[currentBread.category].name;
 
@@ -94,10 +95,13 @@ function RealQuiz() {
     // 오답이 있을 경우
     else {
       // GA: 오답
-      if (retryCount === 0) trackQuizAnswer("real", false, currentBread.name);
-      setRetryCount((prev) => prev + 1);
+      if (retryCount === 0) {
+        trackQuizAnswer("real", false, currentBread.name);
 
-      addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
+        addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
+      }
+
+      setRetryCount((prev) => prev + 1);
     }
   };
 
@@ -177,7 +181,7 @@ function RealQuiz() {
 
               <div>
                 <p className="text-t-primary text-center">빵 이름</p>
-                <div className="grid grid-cols-2 gap-2 my-4">
+                <div className="grid grid-cols-2 gap-2 mt-4">
                   {randomBreadNames.map((bread, idx) => (
                     <div
                       key={idx}
@@ -208,7 +212,14 @@ function RealQuiz() {
                 </div>
               </div>
 
-              <button type="submit" className="p-2 w-full rounded-lg border border-accentgold text-center bg-white">
+              <p className={`text-error text-xs text-center ${retryCount > 0 ? "opacity-100" : "opacity-0"}`}>틀린 문제를 수정한 후, [제출하기]를 눌러주세요</p>
+              <button
+                type="submit"
+                className={`p-2 w-full rounded-lg border border-accentgold text-center bg-white ${
+                  !checkedBreadName || !checkedCategory ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={!checkedBreadName || !checkedCategory}
+              >
                 제출하기
               </button>
             </form>
