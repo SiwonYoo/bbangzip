@@ -9,7 +9,7 @@ function Header({ title, backBtn = false }: { title: string; backBtn?: boolean }
 
   return (
     <>
-      <header className="flex sticky items-center top-0 p-2 w-full h-12 bg-white">
+      <header className="flex sticky items-center top-0 p-2 w-full h-12 bg-white shadow-sm">
         {backBtn ? (
           <button
             onClick={() => {
