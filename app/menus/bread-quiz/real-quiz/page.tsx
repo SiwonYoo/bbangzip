@@ -17,6 +17,7 @@ function RealQuiz() {
   const levelRef = useRef(level);
   const [checkedCategory, setCheckedCategory] = useState("");
   const [checkedBreadName, setCheckedBreadName] = useState("");
+  const [results, setResults] = useState<(null | boolean)[]>(new Array(REAL_QUIZ_TOTAL_COUNT).fill(null));
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useRouter();
   const [categoryAnswers, setCategoryAnswers] = useState<{ [category: string]: "correct" | "wrong" | null }>({});
@@ -88,7 +89,13 @@ function RealQuiz() {
     // 전부 정답일 경우
     if (checkedBreadName === currentBread.name && checkedCategory === correctCategoryName) {
       // GA: 정답
-      if (retryCount === 0) trackQuizAnswer("real", true, currentBread.name);
+      if (retryCount === 0) {
+        trackQuizAnswer("real", true, currentBread.name);
+        setResults((prev) => {
+          prev[level - 1] = true;
+          return prev;
+        });
+      }
 
       setIsOpen(true);
     }
@@ -99,6 +106,11 @@ function RealQuiz() {
         trackQuizAnswer("real", false, currentBread.name);
 
         addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
+
+        setResults((prev) => {
+          prev[level - 1] = false;
+          return prev;
+        });
       }
 
       setRetryCount((prev) => prev + 1);
@@ -143,9 +155,9 @@ function RealQuiz() {
               {level} / {REAL_QUIZ_TOTAL_COUNT}
             </p>
             <div className="flex items-center justify-center">
-              {currentBread.images.real && <Image src={currentBread.images.real} width={250} height={250} alt={currentBread.name} className="rounded-full" />}
+              {currentBread.images.real && <Image src={currentBread.images.real} width={220} height={220} alt={currentBread.name} className="rounded-full" />}
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-10">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-8">
               <div>
                 <p className="text-t-primary text-center">카테고리</p>
                 <div className="grid grid-cols-2 gap-2 my-4">
@@ -212,7 +224,9 @@ function RealQuiz() {
                 </div>
               </div>
 
-              <p className={`text-error text-xs text-center ${retryCount > 0 ? "opacity-100" : "opacity-0"}`}>틀린 문제를 수정한 후, [제출하기]를 눌러주세요</p>
+              <p className={`mt-2 text-error text-xs text-center ${retryCount > 0 ? "opacity-100" : "opacity-0"}`}>
+                틀린 문제를 수정한 후, [제출하기]를 눌러주세요
+              </p>
               <button
                 type="submit"
                 className={`p-2 w-full rounded-lg border border-accentgold text-center bg-white ${
@@ -223,6 +237,14 @@ function RealQuiz() {
                 제출하기
               </button>
             </form>
+
+            {/* ST: 정답 현황 */}
+            <ul className="grid grid-cols-10 place-items-center gap-y-2 mt-8">
+              {results.map((result, idx) => (
+                <li key={idx} className={`w-4 h-4 rounded-full ${result === null ? "bg-gray-300" : result ? "bg-success" : "bg-error"}`}></li>
+              ))}
+            </ul>
+            {/* ED: 정답 현황 */}
           </>
         )}
       </main>

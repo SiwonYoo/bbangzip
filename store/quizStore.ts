@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface wrongBreadType {
+export interface wrongBreadType {
   name: string;
   category: string;
 }
