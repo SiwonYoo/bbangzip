@@ -18,8 +18,8 @@ function CategoryQuiz() {
   const breads = useBreadStore((state) => state.breads);
   const { wrongBreads, addWrongBread, resetWrongBreads } = useQuizStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [isAnswer, setIsAnswer] = useState(false);
   const [startTime, setStartTime] = useState(0);
+  const [results, setResults] = useState<(null | boolean)[]>(new Array(CATEGORY_QUIZ_TOTAL_COUNT).fill(null));
   const [level, setLevel] = useState(1);
   const levelRef = useRef(level);
   const navigate = useRouter();
@@ -61,12 +61,18 @@ function CategoryQuiz() {
     if (categoryId === currentBread.category) {
       // GA: 정답
       trackQuizAnswer("category", true, currentBread.name);
-      setIsAnswer(true);
+      setResults((prev) => {
+        prev[level - 1] = true;
+        return prev;
+      });
     } else {
       // GA: 오답
       trackQuizAnswer("category", false, currentBread.name);
-      setIsAnswer(false);
       addWrongBread({ name: currentBread.name, category: categories[currentBread.category].name });
+      setResults((prev) => {
+        prev[level - 1] = false;
+        return prev;
+      });
     }
 
     setIsOpen(true);
@@ -99,14 +105,19 @@ function CategoryQuiz() {
           </div>
         ) : (
           <>
+            {/* ST: 현재 라운드 */}
             <p className="py-4 text-center">
               {level} / {CATEGORY_QUIZ_TOTAL_COUNT}
             </p>
+            {/* ED: 현재 라운드 */}
 
+            {/* ST: 문제 - 빵 이미지 */}
             <div className="flex items-center justify-center w-full h-70 rounded-xl bg-white">
               <Image src={currentBread.images.official} width={250} height={250} alt={currentBread.name} />
             </div>
+            {/* ED: 문제 - 빵 이미지 */}
 
+            {/* ST: 보기 - 카테고리 */}
             <ul className="py-4">
               {randomCategories &&
                 randomCategories.map((category) => (
@@ -121,6 +132,15 @@ function CategoryQuiz() {
                   </li>
                 ))}
             </ul>
+            {/* ED: 보기 - 카테고리 보기 */}
+
+            {/* ST: 정답 현황 */}
+            <ul className="grid grid-cols-10 place-items-center gap-y-2">
+              {results.map((result, idx) => (
+                <li key={idx} className={`w-4 h-4 rounded-full ${result === null ? "bg-gray-300" : result ? "bg-success" : "bg-error"}`}></li>
+              ))}
+            </ul>
+            {/* ED: 정답 현황 */}
           </>
         )}
       </main>
@@ -129,7 +149,7 @@ function CategoryQuiz() {
         <ResultModal
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          isAnswer={isAnswer}
+          isAnswer={results[level - 1] || false}
           breadName={currentBread.name}
           categoryName={categories[currentBread.category].name}
           handleClickNext={handleClickNext}
