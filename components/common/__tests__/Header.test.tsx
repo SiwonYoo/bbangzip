@@ -1,6 +1,7 @@
 import Header from "@/components/common/Header";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useSession } from "next-auth/react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 
@@ -16,14 +17,23 @@ import { useRouter } from "next/navigation";
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
+jest.mock("next-auth/react", () => ({
+  useSession: jest.fn(),
+  signIn: jest.fn(),
+  signOut: jest.fn(),
+}));
 
 describe("Header 컴포넌트", () => {
   let mockBack: jest.Mock;
 
   beforeEach(() => {
+    // next/navigation
     mockBack = jest.fn();
     const mockUseRouter = jest.mocked(useRouter);
     mockUseRouter.mockReturnValue({ back: mockBack } as Partial<AppRouterInstance> as AppRouterInstance);
+
+    // next-auth/react
+    jest.mocked(useSession).mockReturnValue({ update: jest.fn(), data: null, status: "unauthenticated" });
   });
 
   afterEach(() => {
@@ -74,21 +84,21 @@ describe("Header 컴포넌트", () => {
   describe("뒤로가기 버튼", () => {
     it("backBtn이 true면 버튼이 렌더링되어야 한다", () => {
       render(<Header title="title" backBtn={true} />);
-      const backBtn = screen.getByRole("button");
+      const backBtn = screen.getByAltText("이전 페이지로 이동");
 
       expect(backBtn).toBeInTheDocument();
     });
 
     it("backBtn이 false면 버튼이 렌더링되지 않아야 한다", () => {
       render(<Header title="title" backBtn={false} />);
-      const backBtn = screen.queryByRole("button");
+      const backBtn = screen.queryByAltText("이전 페이지로 이동");
 
       expect(backBtn).not.toBeInTheDocument();
     });
 
     it("버튼 클릭 시 navigate.back()이 호출되어야 한다", async () => {
       render(<Header title="title" backBtn={true} />);
-      const backBtn = screen.getByRole("button");
+      const backBtn = screen.getByAltText("이전 페이지로 이동");
 
       await userEvent.click(backBtn);
 
