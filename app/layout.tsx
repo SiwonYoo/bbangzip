@@ -5,6 +5,7 @@ import "./globals.css";
 import { APP_ENV, GA_TRACKING_ID } from "@/lib/ga";
 import BreadStoreInitializer from "@/components/store/BreadStoreInitializer";
 import GAListener from "@/components/ga/GAListener";
+import { SessionProvider } from "next-auth/react";
 
 const jua = Jua({ subsets: ["latin"], weight: "400", variable: "--font-jua" });
 
@@ -62,7 +63,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-jua dark:bg-black text-t-secondary">
           <BreadStoreInitializer />
           {APP_ENV === "production" && <GAListener />}
-          {children}
+          <SessionProvider>{children}</SessionProvider>
         </div>
       </body>
     </html>
