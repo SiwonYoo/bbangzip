@@ -29,13 +29,13 @@ export default function Home() {
       <div className="flex-1 w-full max-w-2xl bg-white">
         <Header title="빵.zip" />
 
-        <section className="my-2">
-          <div className="w-full text-center">
-            <p className="text-sm">💌 {news[0].message}</p>
-          </div>
-        </section>
-
         <main className="mb-5">
+          <section className="my-2">
+            <div className="w-full text-center">
+              <p className="text-sm">💌 {news[0].message}</p>
+            </div>
+          </section>
+
           <section className="flex justify-center gap-10 px-5 h-40 bg-linear-to-r from-offwhite via-white to-offwhite overflow-hidden">
             <Image src={"/images/main/preview-mock.png"} width={150} height={200} alt="빵.zip 미리보기 아이폰 목업 이미지" className="self-start mt-5" />
             <div className="self-center text-center">

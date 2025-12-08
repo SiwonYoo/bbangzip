@@ -25,7 +25,7 @@ function BreadPedia() {
         ) : (
           <>
             <SearchBar />
-            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap z-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories?.map((item, idx) => (
                 <li key={idx}>
                   <button
