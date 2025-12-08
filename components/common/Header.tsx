@@ -21,7 +21,7 @@ function Header({ title, backBtn = false }: { title: string; backBtn?: boolean }
             <Image src={"/images/bbangzip-icons/back-icon.png"} width={30} height={30} alt="이전 페이지로 이동" />
           </button>
         ) : (
-          <Link href={"/"} className="absolute top-1/2 -translate-y-1/2 w-fit h-fit p-2 block">
+          <Link href={"/"} className="absolute top-1/2 -translate-y-1/2 w-fit h-fit p-2 block" aria-label="home으로 이동">
             <Image src={"/images/main/logo.png"} width={30} height={30} alt="home으로 이동" />
           </Link>
         )}

@@ -59,7 +59,7 @@ describe("Header 컴포넌트", () => {
   describe("홈 링크", () => {
     it("홈으로 가는 링크가 있어야 한다", () => {
       render(<Header title="title" />);
-      const homeBtn = screen.getByRole("link");
+      const homeBtn = screen.getByRole("link", { name: "home으로 이동" });
 
       expect(homeBtn).toHaveAttribute("href", "/");
     });
