@@ -8,11 +8,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 /**
  * 메모 조회 훅 - 특정 유저의 특정 빵 메모 가져오기
  */
-export function useBreadMemos(userId: number, breadId: number) {
+export function useBreadMemo(userId: number, breadId: number, enabled?: boolean) {
   return useQuery({
     queryKey: ["breadMemo", userId, breadId],
     queryFn: () => fetchBreadMemo(userId, breadId),
-    enabled: !!userId && !!breadId,
+    enabled: (enabled ?? true) && !!userId && !!breadId,
   });
 }
 

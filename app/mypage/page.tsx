@@ -40,7 +40,7 @@ function Mypage() {
           <section className="my-4">
             <div className="flex justify-between items-end">
               <h2>나의 빵 컬렉션</h2>
-              <span className="underline text-sm">전체 보기</span>
+              <span className="underline text-sm cursor-pointer">전체 보기</span>
             </div>
             <div></div>
           </section>
@@ -48,7 +48,7 @@ function Mypage() {
           <section className="my-4">
             <div className="flex justify-between items-end">
               <h2>공유한 빵 정보</h2>
-              <span className="underline text-sm">전체 보기</span>
+              <span className="underline text-sm cursor-pointer">전체 보기</span>
             </div>
             <div></div>
           </section>
@@ -56,16 +56,16 @@ function Mypage() {
           <section className="my-4">
             <div className="flex justify-between items-end">
               <h2>숨긴 빵 목록</h2>
-              <span className="underline text-sm">전체 보기</span>
+              <span className="underline text-sm cursor-pointer">전체 보기</span>
             </div>
             <div></div>
           </section>
 
           <div className="flex gap-4 justify-end">
-            <form onClick={handleLogout} className="underline">
+            <form onClick={handleLogout} className="underline cursor-pointer">
               로그아웃
             </form>
-            <form className="text-error underline">탈퇴</form>
+            <form className="text-error underline cursor-pointer">탈퇴</form>
           </div>
         </main>
       )}

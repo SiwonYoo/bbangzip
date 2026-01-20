@@ -8,7 +8,7 @@ export async function createBreadMemo(breadId: number, userId: number, content: 
     .single();
 
   if (error) {
-    console.log("메모 추가 실패", error);
+    console.error("메모 추가 실패", error);
     throw error;
   }
 
@@ -19,7 +19,7 @@ export async function updateBreadMemo(breadId: number, userId: number, content: 
   const { data, error } = await supabase.from("bread_memos").update({ content }).eq("user_id", userId).eq("bread_id", breadId).select().single();
 
   if (error) {
-    console.log("메모 업데이트 실패", error);
+    console.error("메모 업데이트 실패", error);
     throw error;
   }
 
