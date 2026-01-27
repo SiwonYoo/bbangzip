@@ -16,6 +16,7 @@ export default function MemoEditor({ breadName, content, setContent }: MemoEdito
         value={content}
         onChange={(event) => setContent(event.currentTarget.value)}
         className="h-full w-full p-1 rounded-lg border-2 border-accentgold resize-none"
+        autoFocus
       ></textarea>
     </>
   );

@@ -8,6 +8,7 @@ import Button from "@/components/common/Button";
 import { useSession } from "next-auth/react";
 import { useBreadMemo, useCreateMemo, useDeleteMemo, useUpdateMemo } from "@/hooks/useBreadMemo";
 import MemoEditor from "@/app/menus/bread-pedia/MemoEditor";
+import { toast } from "sonner";
 
 function BreadCard({ bread, category }: { bread: BreadType; category: CategoryType }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -39,13 +40,27 @@ function BreadCard({ bread, category }: { bread: BreadType; category: CategoryTy
 
     if (memo) {
       // 메모가 있으면 update 사용
-      updateMemoMutation.mutate({ breadId: bread.id, userId, content });
+      updateMemoMutation.mutate(
+        { breadId: bread.id, userId, content },
+        {
+          onSuccess: () => {
+            toast("메모가 수정되었습니다");
+            startTransition(() => setIsEditMode(false));
+          },
+        },
+      );
     } else {
-      // 메모가 있으면 create 사용
-      createMemoMutation.mutate({ breadId: bread.id, userId, content });
+      // 메모가 없으면 create 사용
+      createMemoMutation.mutate(
+        { breadId: bread.id, userId, content },
+        {
+          onSuccess: () => {
+            toast("메모가 저장되었습니다");
+            startTransition(() => setIsEditMode(false));
+          },
+        },
+      );
     }
-
-    startTransition(() => setIsEditMode(false));
   };
 
   // 메모 삭제
@@ -55,9 +70,15 @@ function BreadCard({ bread, category }: { bread: BreadType; category: CategoryTy
 
     // TODO modal로 변경
     if (confirm("메모를 삭제하시겠습니까?")) {
-      deleteMemoMutation.mutate({ breadId: bread.id, userId });
-
-      startTransition(() => setIsEditMode(false));
+      deleteMemoMutation.mutate(
+        { breadId: bread.id, userId },
+        {
+          onSuccess: () => {
+            toast("메모가 삭제되었습니다");
+            startTransition(() => setIsEditMode(false));
+          },
+        },
+      );
     }
   };
 

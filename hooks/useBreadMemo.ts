@@ -4,6 +4,7 @@ import { createBreadMemo, deleteBreadMemo, updateBreadMemo } from "@/data/action
 import { fetchBreadMemo } from "@/data/functions/bread-memo";
 import { CreateMemoParams, DeleteMemoParams, UpdateMemoParams } from "@/types/memo";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 /**
  * 메모 조회 훅 - 특정 유저의 특정 빵 메모 가져오기
@@ -30,7 +31,10 @@ export function useCreateMemo() {
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
-    onError: (error) => console.error(error),
+    onError: (error) => {
+      console.error(error);
+      toast.error("메모 저장에 실패했습니다");
+    },
   });
 }
 
@@ -48,7 +52,10 @@ export function useUpdateMemo() {
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
-    onError: (error) => console.error(error),
+    onError: (error) => {
+      console.error(error);
+      toast.error("메모 수정에 실패했습니다");
+    },
   });
 }
 
@@ -66,6 +73,9 @@ export function useDeleteMemo() {
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
-    onError: (error) => console.error(error),
+    onError: (error) => {
+      console.error(error);
+      toast.error("메모 삭제에 실패했습니다");
+    },
   });
 }
