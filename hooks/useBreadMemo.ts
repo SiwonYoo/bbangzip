@@ -30,6 +30,7 @@ export function useCreateMemo() {
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
+    onError: (error) => console.error(error),
   });
 }
 
@@ -47,6 +48,7 @@ export function useUpdateMemo() {
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
+    onError: (error) => console.error(error),
   });
 }
 
@@ -57,12 +59,13 @@ export function useDeleteMemo() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ breadId, userId }: DeleteMemoParams) => deleteBreadMemo(userId, breadId),
+    mutationFn: ({ breadId, userId }: DeleteMemoParams) => deleteBreadMemo(breadId, userId),
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["breadMemo", variables.userId, variables.breadId],
       });
     },
+    onError: (error) => console.error(error),
   });
 }

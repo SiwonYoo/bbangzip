@@ -45,8 +45,8 @@ function BreadPedia() {
                   if (selectedCategory.id) return item.category === selectedCategory.id;
                   else return item;
                 })
-                .map((item, idx) => {
-                  if (categories) return <BreadCard key={idx} bread={item} category={categories[item.category]} />;
+                .map((item) => {
+                  if (categories) return <BreadCard key={item.id} bread={item} category={categories[item.category]} />;
                 })}
             </div>
           </>
