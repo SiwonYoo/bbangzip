@@ -8,18 +8,15 @@ export interface BreadMemoType {
 }
 
 export interface CreateMemoParams {
-  userId: number;
   breadId: number;
   content: string;
 }
 
 export interface UpdateMemoParams {
-  userId: number;
   breadId: number;
   content: string;
 }
 
 export interface DeleteMemoParams {
-  userId: number;
   breadId: number;
 }

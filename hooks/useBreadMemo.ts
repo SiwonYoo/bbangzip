@@ -9,10 +9,10 @@ import { toast } from "sonner";
 /**
  * 메모 조회 훅 - 특정 유저의 특정 빵 메모 가져오기
  */
-export function useBreadMemo(userId: number, breadId: number, enabled?: boolean) {
+export function useBreadMemo(userId: number | undefined, breadId: number, enabled?: boolean) {
   return useQuery({
     queryKey: ["breadMemo", userId, breadId],
-    queryFn: () => fetchBreadMemo(userId, breadId),
+    queryFn: () => fetchBreadMemo(breadId),
     enabled: (enabled ?? true) && !!userId && !!breadId,
   });
 }
@@ -20,15 +20,15 @@ export function useBreadMemo(userId: number, breadId: number, enabled?: boolean)
 /**
  * 메모 생성 훅 - 새 메모 추가
  */
-export function useCreateMemo() {
+export function useCreateMemo(userId: number | undefined) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ breadId, userId, content }: CreateMemoParams) => createBreadMemo(breadId, userId, content),
+    mutationFn: ({ breadId, content }: CreateMemoParams) => createBreadMemo(breadId, content),
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["breadMemo", variables.userId, variables.breadId],
+        queryKey: ["breadMemo", userId, variables.breadId],
       });
     },
     onError: (error) => {
@@ -41,15 +41,15 @@ export function useCreateMemo() {
 /**
  * 메모 수정 훅 - 기존 메모 내용 변경
  */
-export function useUpdateMemo() {
+export function useUpdateMemo(userId: number | undefined) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ breadId, userId, content }: UpdateMemoParams) => updateBreadMemo(breadId, userId, content),
+    mutationFn: ({ breadId, content }: UpdateMemoParams) => updateBreadMemo(breadId, content),
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["breadMemo", variables.userId, variables.breadId],
+        queryKey: ["breadMemo", userId, variables.breadId],
       });
     },
     onError: (error) => {
@@ -62,15 +62,15 @@ export function useUpdateMemo() {
 /**
  * 메모 삭제 훅 - 메모 제거
  */
-export function useDeleteMemo() {
+export function useDeleteMemo(userId: number | undefined) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ breadId, userId }: DeleteMemoParams) => deleteBreadMemo(breadId, userId),
+    mutationFn: ({ breadId }: DeleteMemoParams) => deleteBreadMemo(breadId),
 
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["breadMemo", variables.userId, variables.breadId],
+        queryKey: ["breadMemo", userId, variables.breadId],
       });
     },
     onError: (error) => {

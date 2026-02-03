@@ -7,10 +7,17 @@ import { CategoryType } from "@/types";
 import Header from "@/components/common/Header";
 import SearchBar from "@/components/common/SearchBar";
 import BreadCard from "@/app/menus/bread-pedia/BreadCard";
+import { useSavedBreadIds } from "@/hooks/useBreadSave";
+import { useSession } from "next-auth/react";
 
 function BreadPedia() {
   const breads = useBreadStore((state) => state.breads);
   const categories = useBreadStore((state) => state.categories);
+
+  const { data: session } = useSession();
+  const userId = session?.user.dbId;
+  const { data: savedBreadIds } = useSavedBreadIds(userId ?? null);
+
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>({ id: 0, name: "전체" });
 
   return (
@@ -46,7 +53,16 @@ function BreadPedia() {
                   else return item;
                 })
                 .map((item) => {
-                  if (categories) return <BreadCard key={item.id} bread={item} category={categories[item.category]} />;
+                  if (categories)
+                    return (
+                      <BreadCard
+                        key={item.id}
+                        bread={item}
+                        category={categories[item.category]}
+                        userId={userId}
+                        isSaved={savedBreadIds?.includes(item.id) ?? false}
+                      />
+                    );
                 })}
             </div>
           </>

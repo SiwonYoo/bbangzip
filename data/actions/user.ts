@@ -1,3 +1,5 @@
+"use server";
+
 import { supabase } from "@/lib/supabase";
 import { OAuthUser } from "@/types";
 
