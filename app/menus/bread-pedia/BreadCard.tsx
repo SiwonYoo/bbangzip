@@ -9,6 +9,7 @@ import { useBreadMemo, useCreateMemo, useDeleteMemo, useUpdateMemo } from "@/hoo
 import MemoEditor from "@/app/menus/bread-pedia/MemoEditor";
 import { toast } from "sonner";
 import { useSaveBread, useUnsaveBread } from "@/hooks/useBreadSave";
+import LinkButton from "@/components/common/LinkButton";
 
 interface BreadCardProps {
   bread: BreadType;
@@ -37,7 +38,10 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
   // 빵 저장 토글
   const toggleBreadSave = (event: React.MouseEvent) => {
     event.stopPropagation();
-    if (!userId) return;
+    if (!userId) {
+      toast("북마크는 로그인 후 사용할 수 있어요.");
+      return;
+    }
 
     if (isSaved) unsaveBreadMutation.mutate({ breadId: bread.id });
     else saveBreadMutation.mutate({ breadId: bread.id });
@@ -114,7 +118,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
         >
           {/* 앞면 */}
           <div className="absolute inset-0 backface-hidden flex flex-col gap-2 items-center rounded-xl p-4 bg-white">
-            <button type="button" onClick={toggleBreadSave}>
+            <button type="button" onClick={toggleBreadSave} className="cursor-pointer">
               <Bookmark stroke="var(--color-primary)" fill={isSaved ? "var(--color-primary)" : "white"} className="absolute right-4 bg-white" />
             </button>
             <Image src={bread.images.official} width={200} height={200} alt={bread.name} className="aspect-square" />
@@ -127,6 +131,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
           {/* 뒷면 */}
           <div className="absolute inset-0 backface-hidden flex flex-col gap-2 items-center rounded-xl p-4 rotate-y-180 bg-[url('/images/common/card-bg.jpg')] bg-cover bg-no-repeat">
             <div className="absolute inset-0 bg-white/70" />
+
             <div className="flex flex-col z-10 h-full w-full">
               <div className="flex justify-between items-center">
                 <div className="flex gap-1">
@@ -153,7 +158,14 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
                 )}
               </div>
 
-              {isEditMode ? (
+              {!userId ? (
+                <div className="flex-1 flex flex-col items-center justify-center gap-4">
+                  <p className="text-sm">메모는 로그인 후 작성할 수 있어요.</p>
+                  <LinkButton href="/login" size="fit">
+                    <span className="text-sm">로그인하기</span>
+                  </LinkButton>
+                </div>
+              ) : isEditMode ? (
                 // EditMode : 에디터
                 <MemoEditor breadName={bread.name} content={content} setContent={setContent} />
               ) : isLoading ? (

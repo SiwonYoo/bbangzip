@@ -10,7 +10,7 @@ function Button({ children, size = "full", ...rest }: ButtonProps) {
 
   return (
     <>
-      <button className={`rounded-xl border border-accentdark bg-wihte hover:bg-accentgold cursor-pointer ${btnSize[size]}`} {...rest}>
+      <button className={`rounded-xl border border-accentdark bg-white hover:bg-accentgold cursor-pointer ${btnSize[size]}`} {...rest}>
         {children}
       </button>
     </>

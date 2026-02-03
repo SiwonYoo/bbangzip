@@ -13,7 +13,7 @@ function LinkButton({ children, href, size = "full", ...rest }: LinkButtonProps)
 
   return (
     <>
-      <Link href={href} className={`rounded-xl border border-accentdark bg-wihte hover:bg-accentgold text-center cursor-pointer ${btnSize[size]}`} {...rest}>
+      <Link href={href} className={`rounded-xl border border-accentdark bg-white hover:bg-accentgold text-center cursor-pointer ${btnSize[size]}`} {...rest}>
         {children}
       </Link>
     </>
