@@ -42,7 +42,7 @@ function SearchResultContent() {
           </div>
         ) : (
           <>
-            <div className="sticky top-12 bg-offwhite">
+            <div className="sticky top-12 bg-offwhite z-10">
               <SearchBar searchedValue={keywordStr || ""} setKeywordStr={setKeywordStr} />
               {keywordStr &&
                 (filteredBreads.length > 0 ? (

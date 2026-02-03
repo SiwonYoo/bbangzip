@@ -39,7 +39,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
   const toggleBreadSave = (event: React.MouseEvent) => {
     event.stopPropagation();
     if (!userId) {
-      toast("북마크는 로그인 후 사용할 수 있어요.");
+      toast("자주 찾는 빵은 로그인하고 저장해보세요.");
       return;
     }
 
@@ -160,7 +160,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
 
               {!userId ? (
                 <div className="flex-1 flex flex-col items-center justify-center gap-4">
-                  <p className="text-sm">메모는 로그인 후 작성할 수 있어요.</p>
+                  <p className="text-sm text-center">메모는 로그인 후 작성할 수 있어요.</p>
                   <LinkButton href="/login" size="fit">
                     <span className="text-sm">로그인하기</span>
                   </LinkButton>

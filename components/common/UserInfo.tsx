@@ -11,17 +11,15 @@ function UserInfo() {
   }
 
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 right-0 p-2">
+    <div className="absolute top-1/2 -translate-y-1/2 right-2">
       {user ? (
-        <Link href={"/mypage"} type="submit" className="p-2">
-          <p className="flex items-center gap-2">MY</p>
+        <Link href={"/mypage"} className="p-2">
+          MY
         </Link>
       ) : (
-        <div className="flex justify-end">
-          <Link href={"/login"}>
-            <LogIn size={24} />
-          </Link>
-        </div>
+        <Link href={"/login"} className="p-2">
+          <LogIn size={24} />
+        </Link>
       )}
     </div>
   );
