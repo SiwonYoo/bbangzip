@@ -32,8 +32,9 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
   const unsaveBreadMutation = useUnsaveBread(userId);
 
   useEffect(() => {
-    startTransition(() => setContent(memo?.content || ""));
-  }, [memo]);
+    // isEditMode가 참일 때는 동기화를 건너뜀
+    if (!isEditMode) startTransition(() => setContent(memo?.content || ""));
+  }, [memo, isEditMode]);
 
   // 빵 저장 토글
   const toggleBreadSave = (event: React.MouseEvent) => {
@@ -118,7 +119,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
         >
           {/* 앞면 */}
           <div className="absolute inset-0 backface-hidden flex flex-col gap-2 items-center rounded-xl p-4 bg-white">
-            <button type="button" onClick={toggleBreadSave} className="cursor-pointer">
+            <button type="button" onClick={toggleBreadSave} className="cursor-pointer" aria-label={isSaved ? "빵 저장 해제" : "빵 저장"}>
               <Bookmark stroke="var(--color-primary)" fill={isSaved ? "var(--color-primary)" : "white"} className="absolute right-4 bg-white" />
             </button>
             <Image src={bread.images.official} width={200} height={200} alt={bread.name} className="aspect-square" />
@@ -141,10 +142,10 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
                 {/* ViewMode && Memo 존재 : 삭제, 편집 버튼 */}
                 {!isEditMode && memo && (
                   <div className="flex gap-1 items-baseline">
-                    <button onClick={deleteMemo} className="p-0.5 cursor-pointer">
+                    <button onClick={deleteMemo} className="p-0.5 cursor-pointer" aria-label="메모 삭제">
                       <Trash2 size={16} color={"var(--color-error)"} />
                     </button>
-                    <button onClick={editMemo} className="p-0.5 cursor-pointer">
+                    <button onClick={editMemo} className="p-0.5 cursor-pointer" aria-label="메모 편집">
                       <Edit size={16} color={"var(--color-t-primary)"} />
                     </button>
                   </div>
@@ -152,7 +153,7 @@ function BreadCard({ bread, category, userId, isSaved }: BreadCardProps) {
 
                 {/* EditMode : 저장 버튼 */}
                 {isEditMode && (
-                  <button onClick={saveMemo} className="p-0.5 cursor-pointer">
+                  <button onClick={saveMemo} className="p-0.5 cursor-pointer" aria-label="메모 저장">
                     <Check size={16} color={"var(--color-t-primary)"} />
                   </button>
                 )}
