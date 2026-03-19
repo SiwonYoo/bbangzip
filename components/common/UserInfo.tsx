@@ -9,7 +9,7 @@ function UserInfo() {
   const user = session?.user;
 
   if (status === "loading") {
-    return;
+    return null;
   }
 
   return (
