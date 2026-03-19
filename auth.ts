@@ -51,10 +51,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // 이미 가입된 사용자인 경우 에러가 발생하지만 로그인은 계속 진행
             console.error("회원가입 중 에러:", error);
 
-            const { data: fallbackUser } = await supabase.from("users").select("id").eq("email", user.email).single();
+            const { data: fallbackUser, error: fallbackError } = await supabase.from("users").select("id").eq("email", user.email).single();
 
-            if (fallbackUser) user.dbId = fallbackUser.id;
+            if (fallbackError || !fallbackUser) {
+              return false;
+            }
+
+            user.dbId = fallbackUser.id;
           }
+
+          if (!user.dbId) return false;
 
           // NextAuth가 제공하는 user, account 정보 사용
           // providerAccountId를 user.id로 사용
