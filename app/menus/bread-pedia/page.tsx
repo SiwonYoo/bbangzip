@@ -7,10 +7,17 @@ import { CategoryType } from "@/types";
 import Header from "@/components/common/Header";
 import SearchBar from "@/components/common/SearchBar";
 import BreadCard from "@/app/menus/bread-pedia/BreadCard";
+import { useSavedBreadIds } from "@/hooks/useBreadSave";
+import { useSession } from "next-auth/react";
 
 function BreadPedia() {
   const breads = useBreadStore((state) => state.breads);
   const categories = useBreadStore((state) => state.categories);
+
+  const { data: session } = useSession();
+  const userId = session?.user.dbId;
+  const { data: savedBreadIds } = useSavedBreadIds(userId ?? null);
+
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>({ id: 0, name: "전체" });
 
   return (
@@ -25,7 +32,7 @@ function BreadPedia() {
         ) : (
           <>
             <SearchBar />
-            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <ul className="flex justify-between gap-4 sticky top-12 w-full py-4 bg-offwhite/80 overflow-x-scroll text-nowrap z-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories?.map((item, idx) => (
                 <li key={idx}>
                   <button
@@ -45,9 +52,15 @@ function BreadPedia() {
                   if (selectedCategory.id) return item.category === selectedCategory.id;
                   else return item;
                 })
-                .map((item, idx) => {
-                  if (categories) return <BreadCard key={idx} bread={item} category={categories[item.category]} />;
-                })}
+                .map((item) => (
+                  <BreadCard
+                    key={item.id}
+                    bread={item}
+                    category={categories[item.category]}
+                    userId={userId}
+                    isSaved={savedBreadIds?.includes(item.id) ?? false}
+                  />
+                ))}
             </div>
           </>
         )}

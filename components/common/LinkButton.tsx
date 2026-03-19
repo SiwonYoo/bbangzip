@@ -5,17 +5,17 @@ interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> 
   href: string;
 }
 
-function LinkButton({ children, href, size = "full", ...rest }: LinkButtonProps) {
+function LinkButton({ children, href, size = "full", className, ...rest }: LinkButtonProps) {
   const btnSize = {
-    full: "w-full",
-    fit: "w-fit",
+    full: "w-full p-4",
+    fit: "w-fit px-4 py-2",
   };
 
   return (
     <>
       <Link
         href={href}
-        className={`p-4 my-2 rounded-xl border border-accentdark bg-wihte hover:bg-accentgold text-center cursor-pointer ${btnSize[size]}`}
+        className={`rounded-xl border border-accentdark bg-white hover:bg-accentgold text-center cursor-pointer ${btnSize[size]} ${className ?? ""}`.trim()}
         {...rest}
       >
         {children}

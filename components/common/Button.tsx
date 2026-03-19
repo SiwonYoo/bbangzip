@@ -2,15 +2,18 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "full" | "fit";
 }
 
-function Button({ children, size = "full", ...rest }: ButtonProps) {
+function Button({ children, size = "full", className, ...rest }: ButtonProps) {
   const btnSize = {
-    full: "w-full",
-    fit: "w-fit",
+    full: "w-full p-4",
+    fit: "w-fit px-4 py-2",
   };
 
   return (
     <>
-      <button className={`p-4 my-2 rounded-xl border border-accentdark bg-wihte hover:bg-accentgold cursor-pointer ${btnSize[size]}`} {...rest}>
+      <button
+        className={`rounded-xl border border-accentdark bg-white hover:bg-accentgold cursor-pointer ${btnSize[size]} ${className ?? ""}`.trim()}
+        {...rest}
+      >
         {children}
       </button>
     </>
