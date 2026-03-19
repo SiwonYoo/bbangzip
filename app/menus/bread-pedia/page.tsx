@@ -52,18 +52,15 @@ function BreadPedia() {
                   if (selectedCategory.id) return item.category === selectedCategory.id;
                   else return item;
                 })
-                .map((item) => {
-                  if (categories)
-                    return (
-                      <BreadCard
-                        key={item.id}
-                        bread={item}
-                        category={categories[item.category]}
-                        userId={userId}
-                        isSaved={savedBreadIds?.includes(item.id) ?? false}
-                      />
-                    );
-                })}
+                .map((item) => (
+                  <BreadCard
+                    key={item.id}
+                    bread={item}
+                    category={categories[item.category]}
+                    userId={userId}
+                    isSaved={savedBreadIds?.includes(item.id) ?? false}
+                  />
+                ))}
             </div>
           </>
         )}

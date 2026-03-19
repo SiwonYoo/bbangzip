@@ -59,9 +59,9 @@ function SearchResultContent() {
             </div>
 
             <div className="grid grid-cols-2 pb-4 gap-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {filteredBreads.map((item, idx) => {
-                if (categories) return <BreadCard key={idx} bread={item} category={categories[item.category]} />;
-              })}
+              {filteredBreads.map((item, idx) => (
+                <BreadCard key={idx} bread={item} category={categories[item.category]} />
+              ))}
             </div>
           </>
         )}

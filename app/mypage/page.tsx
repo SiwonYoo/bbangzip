@@ -21,7 +21,7 @@ function Mypage() {
     }
   }, [session, status, router]);
 
-  const handleLogout = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await signOut({ redirect: true, callbackUrl: "/login" });
   };
@@ -62,10 +62,12 @@ function Mypage() {
           </section>
 
           <div className="flex gap-4 justify-end">
-            <form onClick={handleLogout} className="underline cursor-pointer">
+            <button type="button" onClick={handleLogout} className="underline cursor-pointer">
               로그아웃
-            </form>
-            <form className="text-error underline cursor-pointer">탈퇴</form>
+            </button>
+            <button type="button" className="text-error underline cursor-pointer">
+              탈퇴
+            </button>
           </div>
         </main>
       )}
